@@ -1,0 +1,126 @@
+sfGuardUser:
+  admin:
+    id: 1
+    username: admin
+    password: admin
+    email_address: "admin@example.com"
+    fullname: Martin Kunze
+    town: Bonn
+    country: DE
+    latitude: 50
+    longitude: 7
+    Groups: [Group_admin]
+  tester2:
+    id: 2
+    username: MMüller
+    password: admin
+    town: Hamburg
+    country: DE
+    email_address: "mmueller@example.com"
+    fullname: Michael Müller
+  tester3:
+    id: 3
+    username: PMeier
+    password: admin
+    town: Hamburg
+    country: DE
+    email_address: "pmeier@example.com"
+    fullname: Peter Meier
+  tester4:
+    id: 4
+    username: UHansen
+    password: admin
+    town: Hamburg
+    country: DE
+    email_address: "uhansen@example.com"
+    fullname: Ulrike Hansen
+  tester5:
+    id: 5
+    username: PPetersen
+    password: admin
+    town: Hamburg
+    country: DE
+    email_address: "ppetersen@example.com"
+    fullname: Peter Petersen
+
+Notification:
+  test1:
+    id: 1
+    Parent: admin
+    body: hello
+  test2:
+    id: 2
+    Parent: admin
+    Sender: tester4
+    body: hello
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin]
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission
+
+Conference:
+  conf1:
+    name: Plat_Forms 2011
+    startdate: "2011-01-18"
+    enddate: "2011-01-20"
+    latitude: 53
+    longitude: 37
+    Creator: tester2
+    Series: alpha
+
+ConferenceAttendee:
+  test1:
+    Conference: conf1
+    User: tester2
+  test2:
+    Conference: conf1
+    User: tester3
+  test3:
+    Conference: conf1
+    User: tester4
+
+Contact:
+
+  rec1:
+    receiver_id: 1
+    sender_id: 2
+    status: in_contact
+  rec2:
+    receiver_id: 2
+    sender_id: 1
+    status: in_contact
+
+  rec3:
+    receiver_id: 1
+    sender_id: 3
+    status: in_contact
+  rec4:
+    receiver_id: 3
+    sender_id: 1
+    status: in_contact
+
+  rec5:
+    receiver_id: 4
+    sender_id: 1
+    status: RCD_received
+  rec6:
+    receiver_id: 1
+    sender_id: 4
+    status: RCD_sent
+
+Series:
+  alpha:
+    name: Series Alpha
+    description: Description
+    Contacts: [tester2]
+  beta:
+    name: Series Beta
+    description: Description
+

@@ -1,0 +1,7 @@
+editSeries:
+  is_secure: true
+  credentials: [admin]
+
+saveSeries:
+  is_secure: true
+  credentials: [admin]

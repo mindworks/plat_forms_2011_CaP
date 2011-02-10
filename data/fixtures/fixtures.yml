@@ -1,0 +1,23 @@
+sfGuardUser:
+  admin:
+    id: 1
+    username: admin
+    password: admin
+    email_address: "admin@example.com"
+    fullname: Martin Kunze
+    town: Bonn
+    country: DE
+    latitude: 50
+    longitude: 7
+    Groups: [Group_admin]
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin]
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission

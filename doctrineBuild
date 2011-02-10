@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -x
+
+if [ $# = 0 ]; then
+  SfEnv=dev
+else
+  SfEnv=$1
+fi
+
+./symfony doctrine:drop-db --env=$SfEnv --no-confirmation
+./symfony doctrine:build-db --env=$SfEnv
+./symfony doctrine:build-model
+./symfony doctrine:clean-model-files
+./symfony doctrine:build-sql --env=$SfEnv
+./symfony doctrine:insert-sql --env=$SfEnv
+./symfony doctrine:data-load --env=$SfEnv
+
+./symfony doctrine:build-forms --env=$SfEnv

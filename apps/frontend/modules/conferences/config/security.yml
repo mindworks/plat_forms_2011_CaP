@@ -1,0 +1,44 @@
+editConference:
+  is_secure: true
+
+showConference:
+  is_secure: true
+
+saveConference:
+  is_secure: true
+
+addToCalendar:
+  is_secure: true
+
+removeFromCalendar:
+  is_secure: true
+  
+showConference:
+  is_secure: true
+  
+inviteFriends:
+  is_secure: true
+
+inviteContacts:
+  is_secure: true
+
+showConferenceAttendees:
+  is_secure: true
+
+showConferenceAttendee:
+  is_secure: true
+
+showConferenceIcalendar:
+  is_secure: true
+
+showConferencePdf:
+  is_secure: true
+
+toggleAttendance:
+  is_secure: true
+
+addToCalendar:
+  is_secure: true
+
+removeFromCalendar:
+  is_secure: true

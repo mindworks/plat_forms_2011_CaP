@@ -1,0 +1,383 @@
+Series:
+  columns:
+    name:
+      type: string(255)
+      notnull: true
+      notblank: true
+    description:
+      type: string(65535)
+      notnull: true
+      default: ''
+    url:
+      type: string(2048)
+      notnull: true
+      default: ''
+  relations:
+    Contacts:
+      class: sfGuardUser
+      refClass: SeriesContact
+      local: series_id
+      foreign: user_id
+    Conferences:
+      class: Conference
+      type: many
+      local: id
+      foreign: series_id
+
+Conference:
+  actAs: [Geographical]
+  columns:
+    name:
+      type: string(255)
+      notnull: true
+      notblank: true
+    description:
+      type: string(65535)
+      notnull: true
+      default: ''
+    startdate:
+      type: date
+      notnull: true
+    enddate:
+      type: date
+      notnull: true
+    venue:
+      type: string(65535)
+      notnull: true
+      default: ''
+    accomodation:
+      type: string(65535)
+      notnull: true
+      default: ''
+    howtofind:
+      type: string(65535)
+      notnull: true
+      default: ''
+    location:
+      type: string(65535)
+      notnull: true
+      default: ''
+    country:
+      type: string(2)
+      notnull: true
+      notblank: true
+      default: DE
+    series_id:
+      type: bigint
+    user_id:
+      type: bigint
+  relations:
+    Series:
+      class: Series
+      local: series_id
+      foreign: id
+      foreignAlias: Conferences
+    Categories:
+      class: Category
+      refClass: ConferenceCategory
+      local: conference_id
+      foreign: category_id
+    Creator:
+      class: sfGuardUser
+      local: user_id
+      type: one
+      foreign: id
+    Attendees:
+      class: sfGuardUser
+      local: conference_id
+      foreign: user_id
+      refClass: ConferenceAttendee
+    Fulltext:
+      class: SearchIndex
+      local: id
+      foreign: object_id
+  indexes:
+    speed:
+      fields: [startdate]
+  options:
+    orderBy: name
+
+DefaultCalendar:
+  columns:
+    user_id:
+      type: bigint
+      primary: true
+    conference_id:
+      type: bigint
+      primary: true
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      onDelete: CASCADE
+    Conference:
+      class: Conference
+      local: conference_id
+      foreign: id
+      onDelete: CASCADE
+
+ConferenceAttendee:
+  columns:
+    conference_id:
+      type: bigint
+      primary: true
+    user_id:
+      type: bigint
+      primary: true
+  relations:
+    Conference:
+      class: Conference
+      local: conference_id
+      foreign: id
+      onDelete: CASCADE
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      onDelete: CASCADE
+
+Category:
+  columns:
+    name:
+      type: string(255)
+      notnull: true
+      notblank: true
+      regexp: '/^[\w\d]+$/'
+    parent_id:
+      type: bigint
+  relations:
+    Parent:
+      class: Category
+      local: parent_id
+      foreign: id
+    Subcategories:
+      class: Category
+      local: id
+      foreign: parent_id
+      type: many
+    Conferences:
+      class: Conference
+      refClass: ConferenceCategory
+      local: category_id
+      foreign: conference_id
+  indexes:
+    name_unique:
+      fields:
+        name: []
+      type: unique
+  options:
+    orderBy: name
+
+ConferenceCategory:
+  columns:
+    conference_id:
+      type: bigint
+      primary: true
+    category_id:
+      type: bigint
+      primary: true
+  relations:
+    Conference:
+      class: Conference
+      local: conference_id
+      foreign: id
+      onDelete: CASCADE
+    Category:
+      class: Category
+      local: category_id
+      foreign: id
+      onDelete: CASCADE
+
+sfGuardUser:
+  actAs: [Timestampable, Geographical]
+  columns:
+    fullname:
+      type: string(255)
+      notnull: true
+      notblank: true
+    first_name: string(255)
+    last_name: string(255)
+    town:
+      type: string(255)
+      notnull: true
+      notblank: true
+    country:
+      type: string(255)
+      notnull: true
+      notblank: true
+    email_address:
+      type: string(255)
+      notnull: true
+      unique: true
+    username:
+      type: string(128)
+      notnull: true
+      unique: true
+    algorithm:
+      type: string(128)
+      default: sha1
+      notnull: true
+    salt: string(128)
+    password: string(128)
+    is_active:
+      type: boolean
+      default: 1
+    is_super_admin:
+      type: boolean
+      default: false
+    last_login:
+      type: timestamp
+  indexes:
+    is_active_idx:
+      fields: [is_active]
+  relations:
+    Groups:
+      class: sfGuardGroup
+      local: user_id
+      foreign: group_id
+      refClass: sfGuardUserGroup
+      foreignAlias: Users
+    Permissions:
+      class: sfGuardPermission
+      local: user_id
+      foreign: permission_id
+      refClass: sfGuardUserPermission
+      foreignAlias: Users
+    Contacts:
+      class: Contact
+      type: many
+      local: id
+      foreign: sender_id
+    ContactsOf:
+      class: Contact
+      type: many
+      local: id
+      foreign: receiver_id
+    Notifications:
+      class: Notification
+      type: many
+      local: id
+      foreign: user_id
+    DefaultCalendarItems:
+      class: Conference
+      refClass: DefaultCalendar
+      local: user_id
+      foreign: conference_id
+      orderBy: startdate
+    Fulltext:
+      class: SearchIndex
+      local: id
+      foreign: object_id
+
+Notification:
+  actAs:
+    Timestampable:
+      created:
+        name: created_at
+        type: timestamp
+        format: Y-m-d H:i:s
+      updated:
+        disabled: true
+  columns:
+    user_id:
+      type: bigint
+      notnull: true
+    sender_id:
+      type: bigint
+      notnull: false
+    conference_id:
+      type: bigint
+      notnull: false
+    body:
+      type: string(65535)
+      notnull: true
+      default: ''
+  relations:
+    Parent:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+    Sender:
+      class: sfGuardUser
+      local: sender_id
+      foreign: id
+    Conference:
+      class: Conference
+      local: conference_id
+      foreign: id
+
+Contact:
+  actAs:
+    Timestampable:
+      created:
+        name: created_at
+        type: timestamp
+        format: Y-m-d H:i:s
+      updated:
+        disabled: true
+
+  columns:
+    sender_id:
+      type: bigint
+      primary: true
+    receiver_id:
+      type: bigint
+      primary: true
+    status:
+      type: enum
+      values: [in_contact, RCD_sent, RCD_received]
+  relations:
+    Sender:
+      class: sfGuardUser
+      local: sender_id
+      foreign: id
+      onDelete: CASCADE
+    Receiver:
+      class: sfGuardUser
+      local: receiver_id
+      foreign: id
+      onDelete: CASCADE
+
+SearchIndex:
+  options:
+    type: MyISAM
+    collate: utf8_unicode_ci
+    charset: utf8
+  columns:
+    model:
+      type: enum
+      values: [Member, Conference]
+      default: conference
+    object_id:
+      type: bigint
+    body:
+      type: string(65535)
+      notnull: true
+      default: ''
+  indexes:
+    speed:
+      fields: [object_id]
+    content:
+      fields: [body]
+      type: fulltext
+
+SeriesContact:
+  columns:
+    series_id:
+      type: bigint
+      primary: true
+    user_id:
+      type: bigint
+      primary: true
+  relations:
+    Series:
+      class: Series
+      local: series_id
+      foreign: id
+      onDelete: CASCADE
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      onDelete: CASCADE

@@ -1,0 +1,201 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial;
+  font-size: 12px;
+}
+
+H1 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+H2, H2 SPAN {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+H3 {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+UL {
+  list-style: none;
+}
+
+UL.mainmenu {
+  overflow: hidden;
+  background-color: #066;
+  margin-bottom: 20px;
+  padding: 15px;
+  -moz-border-radius: 5px;
+}
+
+UL.mainmenu A,
+UL.mainmenu LI {
+  color: #FFF;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+UL.mainmenu A:hover {
+  text-decoration: underline;
+}
+
+UL.mainmenu LI {
+  float: left;
+  margin: 0 8px;
+}
+
+UL.error_list LI {
+  color: red;
+}
+
+DIV.errorInfo {
+  background-color: yellow;
+}
+
+
+LABEL {
+  color: #066;
+  font-weight: bold;
+  display: block;
+}
+TABLE LABEL {
+  display: inline;
+}
+
+TABLE {
+  border-collapse: collapse;
+  border: 1px solid #066;
+  margin-bottom: 10px;
+}
+
+LI.lSeperator {
+  border-left: 2px dotted white;
+  padding-left: 20px;
+}
+LI.rSeperator {
+  padding-right: 10px;
+}
+
+TH {
+  background-color: #eee;
+}
+TH, TD {
+  padding: 5px;
+  text-align: left;
+  vertical-align: top;
+}
+
+FORM {
+  margin-bottom: 10px;
+}
+
+FORM.searchPanel {
+  background-color: #eee;
+  border-bottom: 2px dotted #066;
+  padding: 5px;
+  padding-bottom: 15px;
+  -moz-border-radius: 5px;
+  overflow: hidden;
+}
+
+FORM.searchPanel FIELDSET {
+  float: left;
+  border: none;
+  margin-right: 10px;
+}
+
+BODY {
+  margin: 10px;
+}
+TD.label {
+  vertical-align: top;
+  width: 250px;
+  padding-bottom: 10px;
+}
+
+H3 {
+  color: #066;
+  border-bottom: 1px dotted #066;
+}
+
+DIV.infoFlash, DIV.errorFlash {
+  display: block;
+  padding: 15px;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+DIV.errorFlash {
+
+  border: 1px solid orange;
+  background-color: Bisque;
+}
+DIV.infoFlash {
+  border: 1px solid Green;
+  background-color: PaleGreen;
+}
+
+DIV.rowWrapper {
+  margin-bottom: 20px;
+}
+
+DIV.contentColumn {
+  width: 50%;
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+
+TABLE.plain {
+  border: 0;
+}
+TABLE.plain TH {
+  background-color: white;
+  vertical-align: top;
+  font-weight: normal;
+}
+
+
+INPUT.largeTextbox {
+  width: 500px;
+}
+
+DIV.memberProfile TABLE {
+  min-width: 500px;
+}
+
+A {
+  color: FireBrick;
+  text-decoration: none;
+}
+A:hover {
+  text-decoration: underline;
+}
+IMG.icon {
+  float: left;
+  margin-right: 5px;
+}
+IMG {
+  border: 0;
+}
+P.indent {
+  margin-left: 20px;
+}
+h2, h1 {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+SPAN.green {
+  color: #066;
+}
+.floatLeft {
+  float: left;
+}
+.displayInline {
+  display: inline;
+  margin-left: 5px;
+}

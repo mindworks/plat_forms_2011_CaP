@@ -1,0 +1,254 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: home, action: index }
+
+################
+
+################
+members:
+  url: /members
+  param:  { module: members, action: index }
+
+member_show:
+  url: /members/:username
+  param:  { module: members, action: showMember }
+
+member_save:
+  url: /members/:username/save
+  param:  { module: members, action: saveMember }
+
+member_edit:
+  url: /members/:username/edit
+  param:  { module: members, action: editMember }
+
+member_contacts:
+  url: /members/:username/contacts
+  param:  { module: members, action: showMemberContacts }
+
+member_contact_requests:
+  url: /request/contacts
+  param:  { module: members, action: requestContacts }
+
+member_handle_requests:
+  url: /request/handle
+  param:  { module: members, action: handleContactRequests }
+
+notifications_seen:
+  url: /notifications/seen
+  param:  { module: members, action: handleNotifications }
+
+################
+
+categories:
+  url: /categories
+  param:  { module: categories, action: index }
+
+category_show:
+  url: /categories/:id
+  param:  { module: categories, action: showCategory }
+  requirements: { id: \d+ }
+
+category_edit:
+  url: /categories/:id/edit
+  param:  { module: categories, action: editCategory }
+
+category_save:
+  url: /save/category
+  param:  { module: categories, action: saveCategory }
+
+################
+
+conferences:
+  url: /conferences
+  param:  { module: conferences, action: index }
+
+conferences_expert_search:
+  url: /conferences_expert_search
+  param:  { module: conferences, action: expertSearch }
+
+conference_edit:
+  url: /conferences/:id/edit
+  param:  { module: conferences, action: editConference }
+  requirements: { id: \d+ }
+
+conference_show:
+  url: /conferences/:id
+  param:  { module: conferences, action: showConference }
+  requirements: { id: \d+ }
+
+conference_invite_friends:
+  url: /conference/:id/invite_friends
+  param: { module: conferences, action: inviteFriends }
+  requirements: { id: \d+ }
+
+conference_invite_contacts:
+  url: /conference/:id/invite_contacts
+  param: { module: conferences, action: inviteContacts }
+  requirements: { id: \d+ }
+
+conference_save:
+  url: /save/conference
+  param:  { module: conferences, action: saveConference }
+
+conference_attendees:
+  url: /conferences/:id/attendees
+  param:  { module: conferences, action: showConferenceAttendees }
+  requirements: { id: \d+ }
+
+conference_attendee:
+  url: /conferences/:id/attendees/:username
+  param:  { module: conferences, action: showConferenceAttendee }
+  requirements: { id: \d+ }
+
+conference_icalendar:
+  url: /conferences/:id/icalendar
+  param:  { module: conferences, action: showConferenceIcalendar }
+  requirements: { id: \d+ }
+
+conference_pdf:
+  url: /conferences/:id/pdf
+  param:  { module: conferences, action: showConferencePdf }
+  requirements: { id: \d+ }
+
+conference_toggle_attendance:
+  url: /conference/:id/toggle/attendance
+  param: { module: conferences, action: toggleAttendance }
+  requirements: { id: \d+ }
+
+conference_add_to_calendar:
+  url: /conference/:id/add_to_calendar
+  param: { module: conferences, action: addToCalendar }
+  requirements: { id: \d+ }
+
+conference_remove_from_calendar:
+  url: /conference/:id/remove_from_calendar
+  param: { module: conferences, action: removeFromCalendar }
+  requirements: { id: \d+ }
+
+################
+
+series:
+  url: /series
+  param:  { module: series, action: index }
+
+series_show:
+  url: /series/:id
+  param:  { module: series, action: showSeries }
+  requirements: { id: \d+ }
+
+series_edit:
+  url: /series/:id/edit
+  param:  { module: series, action: editSeries }
+
+series_save:
+  url: /save/series
+  param:  { module: series, action: saveSeries }
+
+################
+################
+################
+
+ws_home:
+  url: /ws
+  param:  { module: categories, action: index, viaRest: true }
+
+################
+
+ws_conference_create:
+  url: /ws/conferences
+  param: { module: conferences, action: saveConference, viaRest: true }
+
+ws_conference_show:
+  url: /ws/conferences/:id
+  param:  { module: conferences, action: showConference, viaRest: true }
+  requirements: { id: \d+ }
+
+ws_conference_show_attendees:
+  url: /ws/conferences/:id/attendees
+  param:  { module: admin, action: wsNotImplemented, viaRest: true }
+
+ws_conference_show_attendee:
+  url: /ws/conferences/:id/attendees/:username
+  param:  { module: admin, action: wsNotImplemented, viaRest: true }
+
+################
+
+ws_members:
+  url: /ws/members
+  param: { module: members, action: index, viaRest: true }
+
+ws_member_show:
+  url: /ws/members/:username
+  param: { module: members, action: showMember, viaRest: true }
+
+ws_member_show_contacts:
+  url: /ws/members/:username/contacts
+  param: { module: members, action: showMemberContacts, viaRest: true }
+
+################
+
+ws_categories:
+  url: /ws/categories
+  param:  { module: admin, action: wsNotImplemented, viaRest: true }
+
+ws_show_category:
+  url: /ws/categories/:id
+  param:  { module: admin, action: wsNotImplemented, viaRest: true }
+
+################
+
+ws_series:
+  url: /ws/series
+  param:  { module: admin, action: wsNotImplemented, viaRest: true }
+
+ws_show_series:
+  url: /ws/series/:id
+  param:  { module: admin, action: wsNotImplemented, viaRest: true }
+
+################
+
+ws_conferences_by_category:
+  url: /ws/conferencesbycategory/:id
+  param:  { module: admin, action: wsNotImplemented, viaRest: true }
+
+################
+
+ws_search:
+  url: /ws/search
+  param:  { module: admin, action: wsNotImplemented, viaRest: true }
+
+################
+
+ws_reset:
+  url: /ws/reset
+  param: { module: admin, action: wsReset, viaRest: true }
+
+ws_factorydefaults:
+  url: /ws/factorydefaults
+  param: { module: admin, action: wsFactoryDefaults, viaRest: true }
+
+################
+
+ws_default:
+  url: /ws/*
+  param:  { module: admin, action: wsNotImplemented, viaRest: true }
+
+################
+################
+################
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
+
+
+

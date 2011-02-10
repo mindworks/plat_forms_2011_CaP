@@ -1,0 +1,1 @@
+phpunit --bootstrap test/bootstrap/unit.php --verbose test

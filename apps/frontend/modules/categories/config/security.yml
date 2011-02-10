@@ -1,0 +1,7 @@
+editCategory:
+  is_secure: true
+  credentials: [admin]
+
+saveCategory:
+  is_secure: true
+  credentials: [admin]

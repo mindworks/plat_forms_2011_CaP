@@ -1,0 +1,23 @@
+index:
+  is_secure: true
+
+showMemberContacts:
+  is_secure: true
+
+showMember:
+  is_secure: true
+
+editMember:
+  is_secure: true
+
+saveMember:
+  is_secure: true
+  
+requestContacts:
+  is_secure: true
+  
+handleContactRequests:
+  is_secure: true
+  
+handleNotifications:
+  is_secure: true
